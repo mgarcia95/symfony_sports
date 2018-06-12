@@ -8,7 +8,7 @@
 
   class SecurityController extends Controller{
     /**
-     * @Route("/login/", name="login")
+     * @Route("/login", name="login")
      */
      public function login(Request $request, AuthenticationUtils $authenticationUtils){
      // get the login error if there is one

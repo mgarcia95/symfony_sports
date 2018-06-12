@@ -1,22 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block javascripts %}
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="{{ asset('build/app.js') }}"></script>
-{% endblock %}
-
-{% block stylesheets %}
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-{% endblock %}
-
 {% block body %}
 
-{% if error is defined %}
+
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 {% endif %}
 
 <div class="container">
@@ -27,8 +15,8 @@
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
                 <form action="{{ path('login') }}" class="form-signin" method="post">
-                <input type="text" class="form-control" placeholder="Username" name="_username" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input id="username" type="text" class="form-control" placeholder="Username" name="_username" value="{{ last_username }}" required autofocus>
+                <input id="password" name="_password" type="password" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Sign in</button>
                 <label class="checkbox pull-left">
@@ -42,5 +30,8 @@
         </div>
     </div>
 </div>
+
+
+
 
 {% endblock %}
