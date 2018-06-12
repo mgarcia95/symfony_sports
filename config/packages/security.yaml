@@ -4,7 +4,10 @@ security:
         App\Entity\User: bcrypt
         Symfony\Component\Security\Core\User\User: plaintext
     providers:
-        in_memory: {memory: ~}
+        my_db_provider:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
