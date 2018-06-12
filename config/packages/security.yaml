@@ -4,7 +4,6 @@ security:
         App\Entity\User:
             algorithm: bcrypt
             cost: 10
-        Symfony\Component\Security\Core\User\User: plaintext
     providers:
         my_db_provider:
             entity:
