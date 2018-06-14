@@ -1,0 +1,35 @@
+{# templates/events.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Lanzarote Fit > View Events {% endblock %}
+
+{% block body %}
+    <h2>View Events </h2>
+
+    <div class="row">
+        {% if events is null %}
+            <p>No events available.<br>
+            <a class="btn btn-primary" href="{{ path('create_event') }}">Create</a>
+            </p>
+
+        {% else %}
+            {% for event in events %}
+                <div class="col-lg-4">
+                    <div class="card">
+                        <h5 class="card-header">Evento de {{ event.sport }}</h5>
+                        <div class="card-body">
+                            <span><strong>Fecha y hora:</strong> {{ event.date|date('d/m/Y H:i') }}</span><br>
+                            <span><strong>Lugar:</strong> {{ event.place }} <br></span>
+                            <span><strong>Creado por:</strong> {{ event.owner.name }} </span><br>
+                            <span><strong>Comentarios:</strong><br> {{ event.comments }} </span>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="{{ path('view_event', {'id': event.id}) }}"> View Event </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
