@@ -5,6 +5,7 @@
   use Symfony\Component\HttpFoundation\Request;
   use Symfony\Component\Routing\Annotation\Route;
   use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+  use Symfony\Component\Form\Extension\Core\Type\TextType;
 
   class SecurityController extends Controller{
     /**
@@ -21,7 +22,22 @@
          'last_username' => $lastUsername,
          'error'         => $error,
      ));
- }
+    }
+
+    /**
+     * @Route("/", name="home")
+     */
+     public function viewHome()
+     {
+        return $this->render('home.html.twig');
+     }
+     /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
+    }
+
 }
 
 ?>

@@ -28,7 +28,7 @@ class EventController extends Controller
          $em = $this->getDoctrine()->getManager();
          $em->persist($event);
          $em->flush();
-         return $this->redirectToRoute('home');
+         return $this->redirectToRoute('view_events');
       }
       return $this->render('create.html.twig', array(
          'form' => $form->createView()
@@ -74,4 +74,23 @@ class EventController extends Controller
             'tickets' => $tickets
          ));
       }
+
+      /**
+      * @Route("/user/events", name="myevents")
+      */
+      public function myeventsView()
+      {
+         $number = 10;
+         $user = $this->getUser();
+         $events = $this->getDoctrine()
+            ->getRepository(Event::class)
+            ->findLastEvents($number);
+         if (!$events) {
+            $events = NULL;
+         }
+         return $this->render('myevents.html.twig', array(
+            'events' => $events, 'user' => $user
+         ));
+      }
+
 }

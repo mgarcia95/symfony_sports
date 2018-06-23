@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -51,13 +53,37 @@ class User implements UserInterface
      * @ORM\Column(type="array")
      */
     private $roles;
+    /**
+      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="owner")
+      */
+    private $events;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="owner")
+     */
+     private $tickets;
 
     public function __construct() {
-        $this->roles = array('ROLE_USER');
+        $roles = array('ROLE_USER');
+        $this->setRoles($roles);
+        $this->owner = new ArrayCollection();
+        $this->tickets = new ArrayCollection();
     }
 
     // other properties and methods
-
+    /**
+     * @return Collection|Ticket[]
+     */
+     public function getTickets()
+     {
+         return $this->tickets;
+     }
+    /**
+     * @return Collection|Event[]
+     */
+      public function getEvents()
+      {
+          return $this->events;
+      }
     public function getEmail()
     {
         return $this->email;
@@ -66,6 +92,11 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getUsername()
@@ -107,12 +138,18 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return $this->roles;
-    }
+        $tmpRoles = $this->roles;
+        if (in_array('ROLE_USER', $tmpRoles) === false) {
+            $tmpRoles[] = 'ROLE_USER';
+        }
+        return $tmpRoles;
+      }
+      public function setRoles($roles)
+        {
+            $this->roles = $roles;
+        }
 
     public function eraseCredentials()
     {
     }
 }
-
-?>

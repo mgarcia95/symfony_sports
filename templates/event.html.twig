@@ -1,35 +1,72 @@
-{# templates/events.html.twig #}
-
 {% extends 'base.html.twig' %}
 
-{% block title %} Lanzarote Fit > View Events {% endblock %}
+{% block title %} View Event {% endblock %}
 
 {% block body %}
-    <h2>View Events </h2>
 
-    <div class="row">
-        {% if events is null %}
-            <p>No events available.<br>
-            <a class="btn btn-primary" href="{{ path('create_event') }}">Create</a>
-            </p>
+<!-- Three columns of text below the carousel -->
+    <div class="container">
+        <div class="col-lg-12">
+            <br/>
+            <h1>Event Information</h1>
 
-        {% else %}
-            {% for event in events %}
-                <div class="col-lg-4">
-                    <div class="card">
-                        <h5 class="card-header">Evento de {{ event.sport }}</h5>
-                        <div class="card-body">
+            {% if event is null %}
+                <p>No event with this id.</p>
+            {% else %}
+
+                <div class="row card">
+                    <h5 class="card-header">Evento de {{ event.sport}}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Creado por {{ event.owner.username }}</h5>
+                        <p class="card-text">
                             <span><strong>Fecha y hora:</strong> {{ event.date|date('d/m/Y H:i') }}</span><br>
-                            <span><strong>Lugar:</strong> {{ event.place }} <br></span>
-                            <span><strong>Creado por:</strong> {{ event.owner.name }} </span><br>
+                            <span><strong>Lugar:</strong> {{ event.place }}<br></span>
+                            <span><strong>Creado por:</strong> {{ event.owner.username }} </span><br>
                             <span><strong>Comentarios:</strong><br> {{ event.comments }} </span>
-                        </div>
-                        <div class="card-footer">
-                            <a class="btn btn-primary" href="{{ path('view_event', {'id': event.id}) }}"> View Event </a>
-                        </div>
+                        </p>
                     </div>
                 </div>
-            {% endfor %}
-        {% endif %}
+                <br/>
+                <h1>Event Tickets</h1>
+
+                {% if tickets is null %}
+                    <p>No tickets for this match.</p>
+                {% else %}
+
+                    <div class="row card">
+                        <h5 class="card-header">{{ tickets|length }} Tickets registered</h5>
+                        <div class="card-body">
+                            <ul class="card-text">
+                                {% for ticket in tickets %}
+                                    <li>Ticket #{{ ticket.id }} registered by {{ ticket.owner.username }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <br/>
+                    Max players: {{ event.maxslot }} <br/>
+                    Registered: {{ tickets|length }} <br/>
+                    {% if tickets|length == event.maxslot %}
+                        All places booked. You can join the waiting list.
+                    {% endif %}
+
+                    {% if tickets|length < event.maxslot %}
+                        There are {{ event.maxslot - tickets|length }} slots available. Register for the event!.
+                    {% endif %}
+                {% endif %}
+
+                <div class="pt-3">
+                    {% if app.user %}
+                        {% if tickets|length < event.maxslot %}
+                            <form action="{{ path('ticket_register', { 'id': event.id }) }}" method="post">
+                                <input type="submit" class="btn btn-primary" value="Play Event!">
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <p><br/>You are not logged in. <a href="{{ path('login') }}">Login</a> or <a href="{{ path('user_register') }}">Register</a></p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

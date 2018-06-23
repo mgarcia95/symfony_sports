@@ -20,10 +20,11 @@ class EventType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
                 'html5' => false,
-                'required' => true
+                'required' => true,
             ))
-            ->add('place', TextType::class, array('label' => false))
-            ->add('sport', TextType::class, array('label' => false))
+            ->add('place', TextType::class)
+            ->add('maxslot', TextType::class, array ( 'label'=>'Slots Available'))
+            ->add('sport', TextType::class)
             ->add('comments', TextType::class)
         ;
     }

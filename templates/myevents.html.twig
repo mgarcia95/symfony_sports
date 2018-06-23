@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} View Events {% endblock %}
+
+{% block body %}
+
+<br/>
+<h1 class="col-md-2 mx-auto">My events</h1>
+<br/>
+<div class="container">
+    <div class="row">
+        {% if events is null %}
+            <p>No events available.<br>
+            <a class="btn btn-primary" href="{{ path('create_event') }}">Create</a>
+            </p>
+
+        {% else %}
+            {% for event in events %}
+                {% if event.owner.id == user.id %}
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <h5 class="card-header">Evento de {{ event.sport }}</h5>
+                            <div class="card-body">
+                                <span><strong>Fecha y hora:</strong> {{ event.date|date('d/m/Y H:i') }}</span><br>
+                                <span><strong>Lugar:</strong> {{ event.place }} </span><br>
+                                <span><strong>Creado por:</strong> {{ event.owner.username }} </span><br>
+                                <span><strong>Comentarios:</strong><br> {{ event.comments }} </span>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-primary" href="{{ path('view_event', {'id': event.id}) }}"> View Event </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+  </div>
+{% endblock %}

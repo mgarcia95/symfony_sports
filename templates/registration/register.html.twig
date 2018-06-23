@@ -4,66 +4,33 @@
 
 {% block body %}
 
-<div class="container">
-	<div class="row main">
-		<div class="panel-heading">
-       <div class="panel-title text-center">
-       		<h1 class="title">Sport Events</h1>
-       	</div>
-    </div>
-		<div class="main-login main-center">
-      <form action="{{ path('user_registration')}}" class="form-horizontal" method="post">
-
-        <div class="form-group">
-					<label for="username" class="cols-sm-2 control-label">Username</label>
-					<div class="cols-sm-10">
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							{{ form_row(form.username, { attr: { 'class': 'form-control' } }) }}
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="email" class="cols-sm-2 control-label">Your Email</label>
-					<div class="cols-sm-10">
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-              {{ form_row(form.email, { attr: { 'class': 'form-control' } }) }}
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="password" class="cols-sm-2 control-label">Password</label>
-					<div class="cols-sm-10">
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							{{ form_row(form.plainPassword.first, { attr: { 'class': 'form-control' } }) }}
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-					<div class="cols-sm-10">
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							{{ form_row(form.plainPassword.second, { attr: { 'class': 'form-control' } }) }}
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group ">
-          {{ form_row(form.save, { attr: {'class':'btn btn-primary btn-lg btn-block login-button'}}) }}
-				</div>
-        <div class="login-register">
-          <a class="btn btn-primary" href="{{ path('login') }}">Login</a>
+<div class="container-fluid py-3">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+                <div class="card card-body">
+                    <h3 class="text-center mb-4">Sign-up</h3>
+                    <form action="{{ path('user_registration')}}" class="form-horizontal" method="post">
+                        <div class="form-group">
+														{{ form_row(form.username, { attr: { 'class': 'form-control input-lg', 'placeholder':'Username' } }) }}
+                        </div>
+                        <div class="form-group">
+														{{ form_row(form.email, { attr: { 'class': 'form-control input-lg', 'placeholder':'Email Address' } }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.plainPassword.first, { attr: { 'class': 'form-control input-lg', 'placeholder':'Password' } }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.plainPassword.second, { attr: { 'class': 'form-control input-lg', 'placeholder':'Confirm Password' } }) }}
+                        </div>
+												<div class="form-group text-center">
+								          {{ form_row(form.save, { attr: {'class':'btn btn-success btn-lg'}}) }}
+												</div>
+												<a  href="{{ path('login') }}" class="text-center new-account">Login</a>
+												{{ form_rest(form) }}
+										</form>
+                </div>
         </div>
-        {{ form_rest(form) }}
-			</form>
-		</div>
-	</div>
+    </div>
 </div>
 
 {% endblock %}

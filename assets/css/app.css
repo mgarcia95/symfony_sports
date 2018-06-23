@@ -142,3 +142,31 @@ input::-webkit-input-placeholder {
 	font-size: 11px;
 	text-align: center;
 }
+
+.img{
+  width: 100%;
+}
+
+h3{
+  font-family: 'Fjalla One', sans-serif;
+}
+
+h1{
+  font-family: 'Fjalla One', sans-serif;
+}
+
+div.carousel h1{
+  font-family: 'Fjalla One', sans-serif;
+  text-shadow: 2px 2px 2px black;
+  font-size: 60px;
+  line-height: 1.5;
+  text-shadow: 2px 2px 2px black;
+}
+
+.jumbotron{
+  background-image: linear-gradient(to bottom, #e9ecef, #e4e6e8, #dfdfe1, #d9d9da, #d3d3d3);
+}
+
+.card{
+  margin-bottom:20px;
+}

@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{path('home')}}">Sport Events</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('view_events')}}">All Events</a>
+      </li>
+      {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Your Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{path('create_event')}}">Create Event</a>
+              <a class="dropdown-item" href="{{path('myevents')}}">My Events</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{path('logout')}}">Logout</a>
+            </div>
+          </li>
+      {% else %}
+            <li class="nav-item">
+              <a class="nav-link disabled" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a style="color:green" class="nav-link disabled" href="/register">Register</a>
+            </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

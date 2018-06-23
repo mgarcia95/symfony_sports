@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\User;
 use App\Entity\Event;
+use App\Entity\Ticket;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
@@ -35,23 +36,19 @@ class Event
       */
       private $created;
       /**
-       * @ORM\Column(type="string", length=255)
-       * @Assert\NotBlank()
-       */
+         * @ORM\Column(type="string", length=255)
+         * @Assert\NotBlank()
+         */
      private $place;
      /**
-      * @ORM\Column(type="string", length=255)
-      * @Assert\NotBlank()
-      */
+        * @ORM\Column(type="string", length=255)
+        * @Assert\NotBlank()
+        */
      private $sport;
      /**
      * @ORM\Column(type="integer")
      */
-     private $minSlots;
-     /**
-      * @ORM\Column(type="integer")
-      */
-      private $maxSlots;
+     private $maxslot;
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="event")
      */
@@ -87,6 +84,14 @@ class Event
     public function setSport($sport)
     {
         $this->sport = $sport;
+    }
+    public function getmaxslot()
+    {
+      return $this->maxslot;
+    }
+    public function setmaxslot($maxslot)
+    {
+        $this->maxslot = $maxslot;
     }
     public function getPlace()
     {
